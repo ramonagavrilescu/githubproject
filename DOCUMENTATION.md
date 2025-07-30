@@ -1,6 +1,4 @@
-# projectbrainquiz
-
-## Quiz App Documentation
+# Quiz App Documentation
 
 This project is a simple web-based Quiz App featuring a rotating earth pictogram, dark mode styling, and multiple-choice questions.
 

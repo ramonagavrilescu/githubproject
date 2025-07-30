@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Quiz App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+  <svg id="earth-pictogram" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 10px;">
+    <circle cx="32" cy="32" r="30" fill="#ffd600" stroke="#232323" stroke-width="4"/>
+    <path d="M32 12C22 12 14 20 14 32C14 44 22 52 32 52C42 52 50 44 50 32C50 20 42 12 32 12ZM32 48C24 48 18 42 18 32C18 22 24 16 32 16C40 16 46 22 46 32C46 42 40 48 32 48Z" fill="#232323"/>
+    <ellipse cx="32" cy="32" rx="10" ry="16" fill="#232323"/>
+  </svg>
+  <h2>Quiz App</h2>
+</div>
+<div id="quiz-container">
+  <div id="question"></div>
+  <div id="choices"></div>
+  <button onclick="nextQuestion()">Next</button>
+</div>
+<div id="result"></div>
+
+<script>
+// Questions array
+const questions = [
+  {
+    question: "What is the capital of France?",
+    options: ["Paris", "Rome", "Madrid", "Berlin"],
+    answer: "Paris"
+  },
+  {
+    question: "What is 2 + 2?",
+    options: ["3", "4", "5", "6"],
+    answer: "4"
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    options: ["Earth", "Mars", "Jupiter", "Venus"],
+    answer: "Mars"
+  },
+  {
+    question: "Who wrote 'Romeo and Juliet'?",
+    options: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+    answer: "William Shakespeare"
+  },
+  {
+    question: "What is the largest ocean on Earth?",
+    options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    answer: "Pacific Ocean"
+  },
+  {
+    question: "What is the boiling point of water?",
+    options: ["90°C", "100°C", "120°C", "80°C"],
+    answer: "100°C"
+  },
+  {
+    question: "Which language is used for web apps?",
+    options: ["Python", "JavaScript", "C++", "Java"],
+    answer: "JavaScript"
+  }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let selectedAnswer = null;
+
+function displayQuestion() {
+  const q = questions[currentQuestionIndex];
+  document.getElementById('question').innerText = q.question;
+  const choicesContainer = document.getElementById('choices');
+  choicesContainer.innerHTML = '';
+
+  q.options.forEach(option => {
+    const button = document.createElement('button');
+    button.innerText = option;
+    button.onclick = () => {
+      selectedAnswer = option;
+    };
+    choicesContainer.appendChild(button);
+  });
+}
+
+function nextQuestion() {
+  if (selectedAnswer === questions[currentQuestionIndex].answer) {
+    score++;
+  }
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    displayQuestion();
+  } else {
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('result').innerText = `Your score: ${score} out of ${questions.length}`;
+  }
+}
+
+// Initialize quiz
+displayQuestion();
+</script>
+
+</body>
+</html>
